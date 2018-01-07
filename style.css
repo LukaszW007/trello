@@ -1,0 +1,56 @@
+* {
+    box-sizing: border-box;
+}
+
+.board {
+    width: 100%;
+    margin: 0 auto;
+
+}
+
+.board h1 {
+    text-align: center;
+}
+
+.column-container {
+    display: flex;
+}
+
+.column {
+    min-width: 300px;
+    width: auto;
+    border:2px solid rgba(0,0,0,0.5);
+    height:100vh;
+    margin: 10px;
+    padding: 10px;
+    display: block;
+}
+.column-title{
+    text-align: center;
+    position: relative;
+}
+.column .btn-delete{
+    position: absolute;
+    float: right;
+}
+.add-card{
+    position: absolute;
+    float: right;
+}
+.column-card-list{
+    list-style-type: none;
+}
+.card{
+    background-color: dimgray;
+    display: flex;
+}
+.card-description{
+    padding: 10px;
+    justify-content: flex-start;
+    flex: 1;
+}
+.card .btn-delete{
+    justify-content: flex-end;
+    align-items: flex-start;
+
+}
