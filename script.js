@@ -1,5 +1,5 @@
 $(function () {
-    function nextElement() {
+    function nextElement () {
         var lastInArray = arrayOfId.indexOf(arrayOfId.length - 1);
         arrayOfId.push(lastInArray + 1);
         console.log(lastInArray);
@@ -7,13 +7,14 @@ $(function () {
 
     var board = {
         name: 'Kanban Board',
-        addColumn: function(column) {
+        addColumn: function (column) {
             this.$element.append(column.$element);
             initSortable();
         },
         $element: $('#board .column-container')
     };
-    function initSortable() {
+
+    function initSortable () {
         $('.column-card-list').sortable({
             connectWith: '.column-card-list',
             placeholder: 'card-placeholder'
@@ -22,13 +23,13 @@ $(function () {
 
     var arrayOfId = [];
 
-    function Column(name) {
+    function Column (name) {
         var self = this;
         this.id = nextElement();
         this.name = name;
         this.$element = createColumn(); // chodzi o to  ze to nie jest metoda ani funkcja tylko funkcja ktora ma sie wydarzyc w momencie utworzenia obiektu klasy Column!
 
-        function createColumn() {
+        function createColumn () {
             // CREATING COMPONENTS OF COLUMNS
             var $column = $('<div>').addClass('column');
             var $columnTitle = $('<h2>').addClass('column-title').text(self.name);
@@ -41,7 +42,13 @@ $(function () {
                 self.removeColumn();
             });
             $columnAddCard.click(function (event) {
-                self.addCard(new Card(prompt("Enter the name of the card")));
+                    var cardName = prompt("Enter the name of the card", "Do something");
+                    console.log(cardName);
+                    if (cardName != null && cardName != "") {
+                        self.addCard(new Card(cardName));
+                    }
+
+                // self.addCard(add());
             });
 
             // CONSTRUCTION COLUMN ELEMENT
@@ -60,18 +67,20 @@ $(function () {
             this.$element.children('ul').append(card.$element);
         },
         removeColumn: function () {
-            this.$element.remove();
+            if (confirm('Are you sure to delete the column?')) {
+                this.$element.remove();
+            }
         }
     };
 
-    function Card(description) {
+    function Card (description) {
         var self = this;
 
         this.id = nextElement();
         this.description = description;
         this.$element = createCard();
 
-        function createCard() {
+        function createCard () {
             var $card = $('<li>').addClass('card');
             var $cardDescription = $('<p>').addClass('card-description').text(self.description);
             var $cardDelete = $('<button>').addClass('btn-delete').text('x');
@@ -88,21 +97,18 @@ $(function () {
 
     Card.prototype = {
         removeCard: function () {
-            this.$element.remove();
+            if (confirm('Are you sure to delete the card?')) {
+                this.$element.remove();
+            }
         }
     };
     $('.create-column')
-        .click(function(){
-            var name = prompt('Enter a column name');
+        .click(function () {
+            var name = prompt('Enter a column name', 'To Do');
             var column = new Column(name);
-            board.addColumn(column);
+            if(name != null && name != ""){
+                board.addColumn(column);
+            }
         });
-
-    var card = {
-        id: '2kd8s958ka',
-        description: 'Create Kanban app',
-        color: 'green',
-        element: $('<div>')
-    };
 
 });

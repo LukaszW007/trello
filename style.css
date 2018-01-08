@@ -1,7 +1,9 @@
 * {
     box-sizing: border-box;
 }
-
+body{
+    min-width: 320px;
+}
 .board {
     width: 100%;
     margin: 0 auto;
@@ -20,34 +22,43 @@
     min-width: 300px;
     width: auto;
     border:2px solid rgba(0,0,0,0.5);
-    height:100vh;
+    height:80vh;
     margin: 10px;
     padding: 10px;
     display: block;
+    position: relative;
 }
 .column-title{
     text-align: center;
     position: relative;
 }
-.column .btn-delete{
+.column>.btn-delete{
     position: absolute;
-    float: right;
+    top: 0;
+    right: 0;
 }
 .add-card{
-    position: absolute;
-    float: right;
+    width: 90px;
+    position: relative;
+    left: calc(50% - 45px);
 }
 .column-card-list{
     list-style-type: none;
+    padding:0 0 5px;
 }
 .card{
-    background-color: dimgray;
+    background-color: rgba(105, 105, 105, 0.38);
     display: flex;
+    box-shadow: rgb(104, 103, 104);
+    border: 1px solid black;
+    margin-bottom: 5px;
 }
 .card-description{
     padding: 10px;
     justify-content: flex-start;
     flex: 1;
+    word-wrap: break-word;
+    max-width: 300px;
 }
 .card .btn-delete{
     justify-content: flex-end;
