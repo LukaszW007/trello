@@ -1,10 +1,10 @@
-function Column (name) {
+function Column(name) {
     var self = this;
     this.id = nextElement();
     this.name = name;
     this.$element = createColumn(); // chodzi o to  ze to nie jest metoda ani funkcja tylko funkcja ktora ma sie wydarzyc w momencie utworzenia obiektu klasy Column!
 
-    function createColumn () {
+    function createColumn() {
         // CREATING COMPONENTS OF COLUMNS
         var $column = $('<div>').addClass('column');
         var $columnTitle = $('<h2>').addClass('column-title').text(self.name);
@@ -36,3 +36,14 @@ function Column (name) {
         return $column;
     }
 }
+
+Column.prototype = {
+    addCard: function (card) {
+        this.$element.children('ul').append(card.$element);
+    },
+    removeColumn: function () {
+        if (confirm('Are you sure to delete the column?')) {
+            this.$element.remove();
+        }
+    }
+};
