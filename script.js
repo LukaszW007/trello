@@ -42,11 +42,11 @@ $(function () {
                 self.removeColumn();
             });
             $columnAddCard.click(function (event) {
-                    var cardName = prompt("Enter the name of the card", "Do something");
-                    console.log(cardName);
-                    if (cardName != null && cardName != "") {
-                        self.addCard(new Card(cardName));
-                    }
+                var cardName = prompt("Enter the name of the card", "Do something");
+                console.log(cardName);
+                if (cardName != null && cardName != "") {
+                    self.addCard(new Card(cardName));
+                }
 
                 // self.addCard(add());
             });
