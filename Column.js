@@ -12,6 +12,7 @@ function Column (id, name) {
         var $columnCardList = $('<ul>').addClass('column-card-list');
         var $columnDelete = $('<button>').addClass('btn-delete').text('x');
         var $columnAddCard = $('<button>').addClass('add-card').text('Add a card');
+        var $editCard = $('.card');
 
         // ADDING EVENTS
         $columnDelete.click(function () {
@@ -32,6 +33,23 @@ function Column (id, name) {
                     if (cardName != null && cardName != "") {
                         var card = new Card(response.id, cardName);
                         self.addCard(card);
+                    }
+                }
+            })
+        });
+
+        $editCard.dblclick(function () {
+            var newColumnName = prompt("Enter new name of the column");
+            var self= this;
+            $.ajax({
+                url:baseUrl + '/column/' + self.id,
+                method: 'PUT',
+                data:{
+                    name: self.name
+                },
+                success: function (response) {
+                    if (newColumnName!=null && newColumnName!=""){
+                        self.name =newColumnName;
                     }
                 }
             })
