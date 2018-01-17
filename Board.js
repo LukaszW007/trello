@@ -17,8 +17,18 @@ function initSortable() {
 $('.create-column')
     .click(function () {
         var name = prompt('Enter a column name', 'To Do');
-        var column = new Column(name);
-        if (name != null && name != "") {
-            board.addColumn(column);
-        }
+        $.ajax({
+           url: baseUrl + '/column' ,
+           method: 'POST',
+            data: {
+               name: name
+            },
+            success: function (reponse) {
+                if (name != null && name != "") {
+                    var column = new Column(response.id,name);
+                    board.addColumn(column);
+                }
+            }
+        });
+
     });

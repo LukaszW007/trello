@@ -23,7 +23,7 @@ function Column (id, name) {
             event.preventDefault();
             $.ajax({
                 url: baseUrl + '/card',
-                method: POST,
+                method: 'POST',
                 data: {
                     name: cardName,
                     bootcamp_kanban_column_id: self.id
