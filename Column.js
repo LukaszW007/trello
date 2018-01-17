@@ -15,7 +15,7 @@ function Column (id, name) {
 
         // ADDING EVENTS
         $columnDelete.click(function () {
-            self.removeColumn();
+            self.deleteColumn();
         });
         $columnAddCard.click(function (event) {
             var cardName = prompt("Enter the name of the card", "Do something");
@@ -63,7 +63,7 @@ Column.prototype = {
             url: baseUrl + '/column/' + self.id,
             method: 'DELETE',
             success: function (response) {
-                self.$element.remove(); //co to jest element?
+                self.$element.remove();
             }
         });
     }
