@@ -1,13 +1,13 @@
-function Card(description) {
+function Card(id,name) {
     var self = this;
 
-    this.id = nextElement();
-    this.description = description;
+    this.id = id;
+    this.name = name;
     this.$element = createCard();
 
     function createCard() {
         var $card = $('<li>').addClass('card');
-        var $cardDescription = $('<p>').addClass('card-description').text(self.description);
+        var $cardDescription = $('<p>').addClass('card-description').text(self.name);
         var $cardDelete = $('<button>').addClass('btn-delete').text('x');
 
         $card.append($cardDescription)
@@ -23,7 +23,14 @@ function Card(description) {
 Card.prototype = {
     removeCard: function () {
         if (confirm('Are you sure to delete the card?')) {
-            this.$element.remove();
+            var self = this;
+            $.ajax({
+                url: baseUrl + '/card/' + self.id,
+                method: DELETE,
+                success: function(){
+                    self.element.remove();
+                }
+            });
         }
     }
 };
