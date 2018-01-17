@@ -28,7 +28,7 @@ function Column (id, name) {
                     name: cardName,
                     bootcamp_kanban_column_id: self.id
                 },
-                success: function () {
+                success: function (response) {
                     if (cardName != null && cardName != "") {
                         var card = new Card(response.id, cardName);
                         self.addCard(card);
@@ -63,7 +63,7 @@ Column.prototype = {
             url: baseUrl + '/column/' + self.id,
             method: 'DELETE',
             success: function (response) {
-                self.element.remove(); //co to jest element?
+                self.$element.remove(); //co to jest element?
             }
         });
     }

@@ -23,7 +23,7 @@ $('.create-column')
             data: {
                name: name
             },
-            success: function (reponse) {
+            success: function (response) {
                 if (name != null && name != "") {
                     var column = new Column(response.id,name);
                     board.addColumn(column);

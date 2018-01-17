@@ -6,7 +6,7 @@ function nextElement () {
 
 var arrayOfId = [];
 
-// Creating ne coulmns
+/*// Creating ne coulmns
 var todoColumn = new Column('Do zrobienia');
 var doingColumn = new Column('W trakcie');
 var doneColumn = new Column('Skończone');
@@ -22,12 +22,12 @@ var card2 = new Card('stworzyc tablice kanban');
 
 // Adding cards to columns
 todoColumn.addCard(card1);
-doingColumn.addCard(card2);
+doingColumn.addCard(card2);*/
 
 var baseUrl = 'https://kodilla.com/pl/bootcamp-api';
 var myHeaders = {
-    'X-Client-Id': 'X-Client-Id',
-    'X-Auth-Token': 'X-Auth-Token'
+    'X-Client-Id': '2701',
+    'X-Auth-Token': 'cd7acb669674b840fc2cc1a3d6570393'
 };
 
 $.ajaxSetup({
