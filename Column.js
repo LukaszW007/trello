@@ -5,6 +5,16 @@ function Column (id, name) {
     this.name = name;
     this.$element = createColumn(); // chodzi o to  ze to nie jest metoda ani funkcja tylko funkcja ktora ma sie wydarzyc w momencie utworzenia obiektu klasy Column!
 
+    /*function getIdOfColumn(column) {
+        var idOfColumn='';
+    $.ajax({
+        url: baseUrl + '/column',
+        method: 'GET',
+        success: function (response) {
+            idOfColumn=response.id;
+        }
+    })
+    }*/
     function createColumn () {
         // CREATING COMPONENTS OF COLUMNS
         var $column = $('<div>').addClass('column');
@@ -12,7 +22,7 @@ function Column (id, name) {
         var $columnCardList = $('<ul>').addClass('column-card-list');
         var $columnDelete = $('<button>').addClass('btn-delete').text('x');
         var $columnAddCard = $('<button>').addClass('add-card').text('Add a card');
-        var $editCard = $('.card');
+        var $editColumn = $('.column-title');
 
         // ADDING EVENTS
         $columnDelete.click(function () {
@@ -38,21 +48,32 @@ function Column (id, name) {
             })
         });
 
-        $editCard.dblclick(function () {
+        $editColumn.dblclick(function () {
             var newColumnName = prompt("Enter new name of the column");
-            var self= this;
-            $.ajax({
-                url:baseUrl + '/column/' + self.id,
-                method: 'PUT',
-                data:{
-                    name: self.name
-                },
-                success: function (response) {
-                    if (newColumnName!=null && newColumnName!=""){
-                        self.name =newColumnName;
+            if (newColumnName!=null && newColumnName!="") {
+                var idOfColumn='';
+                $.ajax({
+                    url: baseUrl + '/column',
+                    method: 'GET',
+                    success: function (response) {
+                        idOfColumn=response.id;
+                        console.log("response.id "+response.id);
                     }
-                }
-            })
+                });
+                var self = idOfColumn;
+                console.log(self);
+                $.ajax({
+                    url: baseUrl + '/column/' + self.id,
+                    method: 'PUT',
+                    data: {
+                        name: newColumnName
+                    },
+                    success: function (response) {
+                        console.log(self.id);
+                        self.name = newColumnName;
+                    }
+                })
+            }
         });
 
         // CONSTRUCTION COLUMN ELEMENT
