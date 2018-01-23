@@ -1,4 +1,4 @@
-function Column (id, name) {
+function Column(id, name) {
     var self = this;
     // this.id = nextElement();
     this.id = id;
@@ -15,14 +15,19 @@ function Column (id, name) {
         }
     })
     }*/
-    function createColumn () {
+    function createColumn() {
         // CREATING COMPONENTS OF COLUMNS
         var $column = $('<div>').addClass('column');
-        var $columnTitle = $('<h2>').addClass('column-title').text(self.name);
+        var $columnTitle = $('<h2>').addClass('column-title-' + self.id).text(self.name);
         var $columnCardList = $('<ul>').addClass('column-card-list');
         var $columnDelete = $('<button>').addClass('btn-delete').text('x');
         var $columnAddCard = $('<button>').addClass('add-card').text('Add a card');
-        var $editColumn = $('.column-title');
+        var $editColumnName = $('.column-title-' + self.id);
+        var idColumn=self.id;
+        var editColumnName = $('.column-title-' + idColumn);
+        console.log(idColumn);
+        console.log('title ' + editColumnName.text());//nie dziala bo kolumna jeszcze w nie stworzona w drzewie DOM
+
 
         // ADDING EVENTS
         $columnDelete.click(function () {
@@ -48,16 +53,22 @@ function Column (id, name) {
             })
         });
 
-        $editColumn.dblclick(function () {
+        $editColumnName.dblclick(function () {
+            var self = this;
             var newColumnName = prompt("Enter new name of the column");
-            if (newColumnName!=null && newColumnName!="") {
-                var idOfColumn='';
+            var columnTitle = self.text();
+            console.log(columnTitle);
+            if (newColumnName != null && newColumnName != "") {
+                var idOfColumn = '';
                 $.ajax({
                     url: baseUrl + '/column',
                     method: 'GET',
+                    data: {
+                        name: columnTitle
+                    },
                     success: function (response) {
-                        idOfColumn=response.id;
-                        console.log("response.id "+response.id);
+                        idOfColumn = response.id;
+                        console.log("response.id " + response.id);
                     }
                 });
                 var self = idOfColumn;
