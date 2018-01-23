@@ -7,7 +7,7 @@ var board = {
     $element: $('#board .column-container')
 };
 
-function initSortable() {
+function initSortable () {
     $('.column-card-list').sortable({
         connectWith: '.column-card-list',
         placeholder: 'card-placeholder'
@@ -17,18 +17,17 @@ function initSortable() {
 $('.create-column')
     .click(function () {
         var name = prompt('Enter a column name', 'To Do');
-        $.ajax({
-           url: baseUrl + '/column' ,
-           method: 'POST',
-            data: {
-               name: name
-            },
-            success: function (response) {
-                if (name != null && name != "") {
-                    var column = new Column(response.id,name);
+        if (name != null && name != "") {
+            $.ajax({
+                url: baseUrl + '/column',
+                method: 'POST',
+                data: {
+                    name: name
+                },
+                success: function (response) {
+                    var column = new Column(response.id, name);
                     board.addColumn(column);
                 }
-            }
-        });
-
+            });
+        }
     });
