@@ -18,15 +18,12 @@ function Column(id, name) {
     function createColumn() {
         // CREATING COMPONENTS OF COLUMNS
         var $column = $('<div>').addClass('column');
-        var $columnTitle = $('<h2>').addClass('column-title-' + self.id).text(self.name);
+        var $columnTitle = $('<h2>').addClass('column-title ' + self.id).text(self.name);
         var $columnCardList = $('<ul>').addClass('column-card-list');
         var $columnDelete = $('<button>').addClass('btn-delete').text('x');
         var $columnAddCard = $('<button>').addClass('add-card').text('Add a card');
-        var $editColumnName = $('.column-title-' + self.id);
-        var idColumn=self.id;
-        var editColumnName = $('.column-title-' + idColumn);
-        console.log(idColumn);
-        console.log('title ' + editColumnName.text());//nie dziala bo kolumna jeszcze w nie stworzona w drzewie DOM
+        var $editColumnName = $('.column-title');
+
 
 
         // ADDING EVENTS
@@ -55,12 +52,13 @@ function Column(id, name) {
 
         $editColumnName.dblclick(function () {
             var self = this;
+            var editColumnName = $('.column-title').attr('class');
+            var idOfColumn = editColumnName.slice(13,editColumnName.length); // "column-title" length is 12
+            console.log(idOfColumn,typeof idOfColumn);
             var newColumnName = prompt("Enter new name of the column");
-            var columnTitle = self.text();
-            console.log(columnTitle);
             if (newColumnName != null && newColumnName != "") {
-                var idOfColumn = '';
-                $.ajax({
+                console.log(idOfColumn);
+    /*            $.ajax({
                     url: baseUrl + '/column',
                     method: 'GET',
                     data: {
@@ -70,11 +68,9 @@ function Column(id, name) {
                         idOfColumn = response.id;
                         console.log("response.id " + response.id);
                     }
-                });
-                var self = idOfColumn;
-                console.log(self);
+                });*/
                 $.ajax({
-                    url: baseUrl + '/column/' + self.id,
+                    url: baseUrl + '/column/' + idOfColumn,
                     method: 'PUT',
                     data: {
                         name: newColumnName
@@ -82,6 +78,7 @@ function Column(id, name) {
                     success: function (response) {
                         console.log(self.id);
                         self.name = newColumnName;
+                        $('.'+idOfColumn).text(newColumnName);
                     }
                 })
             }
