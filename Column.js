@@ -39,27 +39,6 @@ function Column(id, name) {
             })
         });
 
-        $editColumnName.dblclick(function () {
-            var self = this;
-            var editColumnName = $('.column-title').attr('class');
-            var idOfColumn = editColumnName.slice(13, editColumnName.length); // "column-title" length is 12
-            var newColumnName = prompt("Enter new name of the column");
-            if (newColumnName != null && newColumnName != "") {
-                $.ajax({
-                    url: baseUrl + '/column/' + idOfColumn,
-                    method: 'PUT',
-                    data: {
-                        name: newColumnName
-                    },
-                    success: function () {
-                        console.log(self.id);
-                        self.name = newColumnName;
-                        $('.' + idOfColumn).text(newColumnName);
-                    }
-                })
-            }
-        });
-
         $cardEditName.dblclick(function () {
             var self = this;
             var cardText = $(this).children(".card-description").html();
@@ -78,7 +57,7 @@ function Column(id, name) {
                     },
                     success: function () {
                         self.name = newCardName;
-                        
+
                     }
                 })
             }
@@ -95,6 +74,27 @@ function Column(id, name) {
         return $column;
     }
 }
+
+/*function editColumnName() {
+    var self = this;
+    var editColumnName = $('.column-title').attr('class');
+    var idOfColumn = editColumnName.slice(13, editColumnName.length); // "column-title" length is 12
+    var newColumnName = prompt("Enter new name of the column");
+    if (newColumnName) {
+        $.ajax({
+            url: baseUrl + '/column/' + idOfColumn,
+            method: 'PUT',
+            data: {
+                name: newColumnName
+            },
+            success: function () {
+                console.log(self.id);
+                self.name = newColumnName;
+                $('.' + idOfColumn).text(newColumnName);
+            }
+        })
+    }
+}*/
 
 Column.prototype = {
     addCard: function (card) {
