@@ -10,12 +10,14 @@ function Card(id,name) {
         var $cardDescription = $('<p>').addClass('card-description').text(self.name);
         var $cardDelete = $('<button>').addClass('btn-delete').text('x');
 
+
         $card.append($cardDescription)
             .append($cardDelete);
 
         $cardDelete.click(function () {
             self.removeCard();
         });
+
         return $card;
     }
 }
