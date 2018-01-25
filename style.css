@@ -27,6 +27,7 @@ body{
     padding: 10px;
     display: block;
     position: relative;
+    overflow: auto;
 }
 .column-title{
     text-align: center;
