@@ -8,6 +8,7 @@ var board = {
 };
 
 $('.column').on('dblclick', '.card-description', function () {
+    console.log('dziala');
     var cardName = $(this).html();
     var editColumnName = $(this).closest('.column').find('.column-title').attr('class');
     var idOfColumn = editColumnName.slice(13, editColumnName.length); // "column-title" length is 12
@@ -32,7 +33,7 @@ $('.column').on('dblclick', '.card-description', function () {
 });
 
 
-$('.column-container').on("dblclick",".column-title",function () {
+/*$('.column-container').on("dblclick",".column-title",function () {
     var self = this;
     var editColumnName = $(this).attr('class');
     console.log(editColumnName);
@@ -52,7 +53,7 @@ $('.column-container').on("dblclick",".column-title",function () {
             }
         })
     }
-});
+});*/
 
 
 function initSortable () {
