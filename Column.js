@@ -12,7 +12,7 @@ function Column(id, name) {
         var $columnDelete = $('<button>').addClass('btn-delete').text('x');
         var $columnAddCard = $('<button>').addClass('add-card').text('Add a card');
 
-            $($column).data("id", self.id);
+        $($column).data("id", self.id);
 
 
         // ADDING EVENTS
@@ -21,7 +21,6 @@ function Column(id, name) {
         });
         $columnAddCard.click(function (event) {
             var cardName = prompt("Enter the name of the card", "Do something");
-            // console.log(cardName);
             event.preventDefault();
             $.ajax({
                 url: baseUrl + '/card',
@@ -54,11 +53,6 @@ Column.prototype = {
     addCard: function (card) {
         this.$element.children('ul').append(card.$element);
     },
-    /*    removeColumn: function () {
-            if (confirm('Are you sure to delete the column?')) {
-                this.$element.remove();
-            }
-        },*/
     deleteColumn: function () {
         if (confirm('Are you sure to delete the column?')) {
             var self = this;

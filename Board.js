@@ -21,7 +21,6 @@ $('.column-container')
                     name: newColumnName
                 },
                 success: function () {
-                    console.log(self.id);
                     self.name = newColumnName;
                     $('.' + idOfColumn).text(newColumnName);
                 }
@@ -29,13 +28,11 @@ $('.column-container')
         }
     })
     .on('dblclick', '.card-description', function () {
-        console.log('dziala');
         var cardName = $(this).html();
         var idOfColumn = $(this).closest('.column').data('id');
-        var idOfCard = $(this).closest('.card').data('id'); // "column-title" length is 12
+        var idOfCard = $(this).closest('.card').data('id');
         var self = this;
         var newCardName = prompt("Enter new name of the card", cardName);
-        console.log(idOfColumn);
         if (newCardName) {
             $.ajax({
                 url: baseUrl + '/card/' + idOfCard,
@@ -45,7 +42,6 @@ $('.column-container')
                     bootcamp_kanban_column_id: idOfColumn
                 },
                 success: function () {
-                    console.log('old name of the card: ' + self.name)
                     self.name = newCardName;
                     $(self).text(newCardName);
                 }
