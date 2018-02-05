@@ -49,26 +49,7 @@ function Column(id, name) {
     }
 }
 
-var $draggable = $('.card').draggabilly();
-$draggable.on('dragEnd', function () {
-    var self = this;
-    var cardName = self.name;
-    self.removeCard;
-    $.ajax({
-        url: baseUrl + '/card',
-        method: 'POST',
-        data: {
-            name: cardName,
-            bootcamp_kanban_column_id: self.id
-        },
-        success: function (response) {
-            if (cardName != null && cardName != "") {
-                var card = new Card(response.id, cardName);
-                self.addCard(card);
-            }
-        }
-    })
-});
+
 Column.prototype = {
     addCard: function (card) {
         this.$element.children('ul').append(card.$element);

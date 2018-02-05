@@ -56,3 +56,4 @@ function setupCards (col, cards) {
         col.addCard(card);
     });
 }
+

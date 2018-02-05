@@ -49,8 +49,29 @@ $('.column-container')
         }
     });
 
+var $draggable = $('.card-description').draggabilly();
+$draggable.on('dragEnd', function () {
+    var self = this;
+    var cardName = self.name;
+    console.log(cardName);
+    self.removeCard;
+    $.ajax({
+        url: baseUrl + '/card',
+        method: 'POST',
+        data: {
+            name: cardName,
+            bootcamp_kanban_column_id: self.id
+        },
+        success: function (response) {
+            if (cardName != null && cardName != "") {
+                var card = new Card(response.id, cardName);
+                self.addCard(card);
+            }
+        }
+    })
+});
 
-function initSortable() {
+function initSortable () {
     $('.column-card-list').sortable({
         connectWith: '.column-card-list',
         placeholder: 'card-placeholder'
